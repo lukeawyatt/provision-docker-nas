@@ -17,10 +17,11 @@
 # *************************
 #
 # This is the name of the host, local to this configuration only.
-# Use only ALPHA-NUMERIC characters with no spaces.
+# Use only ALPHA-NUMERIC characters with no spaces. The script will 
+# automatically append '.local' to your entered value.
 HOST=GIBSON
 #
-# This is the system user to assign permission to the share directories.
+# This is the system user used to assign permissions to the share directories.
 USR=lwyatt
 #
 # This is the mount path of the physical hard drive or parent share directory.
