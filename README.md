@@ -22,7 +22,7 @@ Pull down the script
 wget https://raw.githubusercontent.com/lukeawyatt/provision-docker-nas/master/deploy-docker-nas.sh -O deploy-docker-nas.sh
 ```
 
-Now lets modify the permissions to allow execution
+Modify the permissions to allow execution
 
 ```shell
 chmod u+x deploy-docker-nas.sh
@@ -34,7 +34,10 @@ Edit the script to change our configuration
 vim deploy-docker-nas.sh
 ```
 
-Execute the script with superuser privileges to provision the NAS.  Clip the output for your records.  This script can be re-ran since
+Execute the script with superuser privileges to provision the NAS.  Clip the output for your records.  This script can be re-ran since it'll break down the existing containers first.  If your paths change, re-running the script will leave the residual files as they exist.
+```shell
+sudo ./deploy-docker-nas.sh
+```
 
 
 ## Configuration
@@ -42,15 +45,14 @@ Execute the script with superuser privileges to provision the NAS.  Clip the out
 Edit the PRELIMINARY CONFIGURATION section of the script to your desired setting.  
 
 #### HOST
-This is the name of the host, local to this configuration only.
-Use only ALPHA-NUMERIC characters with no spaces.
+This is the name of the host, local to this configuration only. Use only ALPHA-NUMERIC characters with no spaces. The script will automatically append '.local' to your entered value.
 
 ```shell
 HOST=GIBSON
 ```
 
 #### USR
-This is the system user to assign permission to the share directories.
+This is the system user used to assign permissions to the share directories.
 
 ```shell
 USR=lwyatt
@@ -78,8 +80,10 @@ IHDD2="/GIBSON/physical/IHDD2"
 #### USERS
 This is the user array. Each key of this associative array represents a
 share by name. The semicolon delimited (;) value represents the below:
-Place: 1 - Username
-Place: 2 - Password
+
+* Place: 1 - Username
+* Place: 2 - Password
+
 
 ```shell
 declare -A USERS=(
@@ -91,12 +95,14 @@ declare -A USERS=(
 #### SHARES
 This is the share array. Each key of this associative array represents a
 share by name. The semicolon delimited (;) value represents the below:
-Place: 1 - Browsable (yes or no)
-Place: 2 - Readonly (yes or no)
-Place: 3 - Guest (yes or no)
-Place: 4 - Users (Comma Delimited), Or 'all'
-Place: 5 - Admins (Comma Delimited), Or 'none'
-Place: 6 - Users with Write Permission Whitelist (On RO) (Comma Delimited)
+
+* Place: 1 - Browsable (yes or no)
+* Place: 2 - Readonly (yes or no)
+* Place: 3 - Guest (yes or no)
+* Place: 4 - Users (Comma Delimited), Or 'all'
+* Place: 5 - Admins (Comma Delimited), Or 'none'
+* Place: 6 - Users with Write Permission Whitelist (On RO) (Comma Delimited)
+
 
 ```shell
 declare -A SHARES=(
@@ -116,6 +122,7 @@ declare -A SHARES=(
 	["WorkspaceVideo"]="yes;no;no;all;write;write"
 )
 ```
+
 
 ## Feedback
 
