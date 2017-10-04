@@ -87,8 +87,8 @@ share by name. The semicolon delimited (;) value represents the below:
 
 ```shell
 declare -A USERS=(
-	["read"]="read"
-	["write"]="write"
+	["readuser"]="read"
+	["writeuser"]="write"
 )
 ```
 
@@ -106,22 +106,39 @@ share by name. The semicolon delimited (;) value represents the below:
 
 ```shell
 declare -A SHARES=(
-	["Archives"]="yes;no;no;all;write;write"
-	["BroadcastSeries"]="yes;yes;yes;all;write;write"
-	["Cinema"]="yes;yes;yes;all;write;write"
-	["FamilyImages"]="yes;no;no;all;write;write"
-	["FamilyVideo"]="yes;no;no;all;write;write"
-	["Literature"]="yes;yes;yes;all;write;write"
-	["Music"]="yes;yes;yes;all;write;write"
-	["Software"]="yes;yes;yes;all;write;write"
-	["Staging"]="yes;yes;yes;all;write;write"
-	["WorkspaceAudio"]="yes;no;no;all;write;write"
-	["WorkspaceDevelopment"]="yes;no;no;all;write;write"
-	["WorkspaceGaming"]="yes;no;no;all;write;write"
-	["WorkspaceGraphics"]="yes;no;no;all;write;write"
-	["WorkspaceVideo"]="yes;no;no;all;write;write"
+	["Archives"]="yes;no;no;all;writeuser;writeuser"
+	["BroadcastSeries"]="yes;yes;yes;all;writeuser;writeuser"
+	["Cinema"]="yes;yes;yes;all;writeuser;writeuser"
+	["FamilyImages"]="yes;no;no;all;writeuser;writeuser"
+	["FamilyVideo"]="yes;no;no;all;writeuser;writeuser"
+	["Literature"]="yes;yes;yes;all;writeuser;writeuser"
+	["Music"]="yes;yes;yes;all;writeuser;writeuser"
+	["Software"]="yes;yes;yes;all;writeuser;writeuser"
+	["Staging"]="yes;yes;yes;all;writeuser;writeuser"
+	["WorkspaceAudio"]="yes;no;no;all;writeuser;writeuser"
+	["WorkspaceDevelopment"]="yes;no;no;all;writeuser;writeuser"
+	["WorkspaceGaming"]="yes;no;no;all;writeuser;writeuser"
+	["WorkspaceGraphics"]="yes;no;no;all;writeuser;writeuser"
+	["WorkspaceVideo"]="yes;no;no;all;writeuser;writeuser"
 )
 ```
+
+
+## Tested Versions
+
+My test environment is as follows.  If you have tested in another environment/version set, please add to this list.
+
+* Ubuntu 16.04.3 LTS
+* GNU Bash 4.3.48
+* Docker CE 17.09.0
+* Samba 4.5.8 (Docker)
+* Portainer 1.14.3
+* rsync 3.1.1 pv 31
+
+
+## ToDo
+
+* Configuration Validation
 
 
 ## Feedback
