@@ -191,13 +191,15 @@ echo;echo;
 # SETUP SYNC JOB
 if [ -z ${IHDD2+x} ]; then 
 	echo "6) NO BACKUP PATH SPECIFIED, REMOVING SYNC AGENT JOB IF FOUND"
-	rm -f "/etc/cron.daily/$HOST"
+	rm -f "/etc/cron.daily/${HOST,,}"
 else 
 	echo "6) CREATING/UPDATING SYNC JOB"
 	echo "File list will output below"
-	bash -c "printf 'rsync -av --delete $IHDD1/shares $IHDD2' > /etc/cron.daily/$HOST"
-	chmod ug+x "/etc/cron.daily/$HOST"
-	ls "/etc/cron.daily/$HOST"
+	HDR='#!/bin/bash'
+	bash -c "printf '$HDR\n' > /etc/cron.daily/${HOST,,}"
+	bash -c "printf 'rsync -av --delete $IHDD1/shares $IHDD2' >> /etc/cron.daily/${HOST,,}"
+	chmod ug+x "/etc/cron.daily/${HOST,,}"
+	ls "/etc/cron.daily/${HOST,,}"
 	echo;echo;
 fi
 
@@ -213,7 +215,7 @@ if [ -z ${IHDD2+x} ]; then
 	echo "Backup Job: NONE"
 else
 	echo "Backup Share Directory: $IHDD2/shares"
-	echo "Backup Job: /etc/cron.daily/$HOST"
+	echo "Backup Job: /etc/cron.daily/${HOST,,}"
 fi
 for i in "${!SHARES[@]}"
 do
