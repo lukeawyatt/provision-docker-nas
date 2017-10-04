@@ -3,8 +3,10 @@
 ## UBUNTU-NAS-DOCKER PROVISIONING SCRIPT ##
 ## ******** RUN AS A SUPERUSER ********* ##
 ##                                       ##
-## Author: Luke Wyatt                    ##
-## Date:   2017.10.02                    ##
+## Author:                   Luke Wyatt  ##
+## Contact:            <luke@meat.space> ##
+## Create Date:               2017.10.02 ##
+## Last Modified Date:        2017.10.04 ##
 ###########################################
 
 # REQUIREMENTS:
@@ -40,8 +42,8 @@ IHDD2="/GIBSON/physical/IHDD2"
 # Place: 1 - Username
 # Place: 2 - Password
 declare -A USERS=(
-	["read"]="read"
-	["write"]="write"
+	["readuser"]="read"
+	["writeuser"]="write"
 )
 #
 # This is the share array. Each key of this associative array represents a
@@ -53,20 +55,20 @@ declare -A USERS=(
 # Place: 5 - Admins (Comma Delimited), Or 'none'
 # Place: 6 - Users with Write Permission Whitelist (On RO) (Comma Delimited)
 declare -A SHARES=(
-	["Archives"]="yes;no;no;all;write;write"
-	["BroadcastSeries"]="yes;yes;yes;all;write;write"
-	["Cinema"]="yes;yes;yes;all;write;write"
-	["FamilyImages"]="yes;no;no;all;write;write"
-	["FamilyVideo"]="yes;no;no;all;write;write"
-	["Literature"]="yes;yes;yes;all;write;write"
-	["Music"]="yes;yes;yes;all;write;write"
-	["Software"]="yes;yes;yes;all;write;write"
-	["Staging"]="yes;yes;yes;all;write;write"
-	["WorkspaceAudio"]="yes;no;no;all;write;write"
-	["WorkspaceDevelopment"]="yes;no;no;all;write;write"
-	["WorkspaceGaming"]="yes;no;no;all;write;write"
-	["WorkspaceGraphics"]="yes;no;no;all;write;write"
-	["WorkspaceVideo"]="yes;no;no;all;write;write"
+	["Archives"]="yes;no;no;all;writeuser;writeuser"
+	["BroadcastSeries"]="yes;yes;yes;all;writeuser;writeuser"
+	["Cinema"]="yes;yes;yes;all;writeuser;writeuser"
+	["FamilyImages"]="yes;no;no;all;writeuser;writeuser"
+	["FamilyVideo"]="yes;no;no;all;writeuser;writeuser"
+	["Literature"]="yes;yes;yes;all;writeuser;writeuser"
+	["Music"]="yes;yes;yes;all;writeuser;writeuser"
+	["Software"]="yes;yes;yes;all;writeuser;writeuser"
+	["Staging"]="yes;yes;yes;all;writeuser;writeuser"
+	["WorkspaceAudio"]="yes;no;no;all;writeuser;writeuser"
+	["WorkspaceDevelopment"]="yes;no;no;all;writeuser;writeuser"
+	["WorkspaceGaming"]="yes;no;no;all;writeuser;writeuser"
+	["WorkspaceGraphics"]="yes;no;no;all;writeuser;writeuser"
+	["WorkspaceVideo"]="yes;no;no;all;writeuser;writeuser"
 )
 
 
@@ -93,6 +95,10 @@ echo;echo;
 # STAGE ENVIRONMENT
 echo "3.A) STAGING NAS CONTAINERS"
 echo;
+
+echo "Initializing system vars..."
+UID=$(id -u $USR)
+GID=$(id -g $USR)
 
 echo "Stopping existing Portainer container if exists..."
 docker stop Portainer
@@ -144,8 +150,8 @@ echo;echo;
 echo "4.B) LAUNCH SAMBA CONTAINER"
 docker run \
 	--volume "$IHDD1/shares:/mount" \
-	--env USERID=1000 \
-	--env GROUPID=1000 \
+	--env USERID=$UID \
+	--env GROUPID=$GID \
 	--network="host" \
 	--publish=137:137/udp \
 	--publish=138:138/udp \
@@ -206,11 +212,14 @@ fi
 
 
 
-# OUTPUT
-echo "YOUR PROVISIONED PATHS:"
+# PROVISIONED OUTPUT
+echo "YOUR PROVISIONED PATHS - COPY FOR YOUR RECORDS:"
 echo "Volume Root: /$HOST/volumes/"
 echo "Portainer Volume: /$HOST/volumes/portainer"
+echo "Portainer Address: http://$HOST"
+echo "Portainer Address (Local IP): http://127.0.0.1"
 echo "Root Share Directory: $IHDD1/shares"
+
 if [ -z ${IHDD2+x} ]; then 
 	echo "Backup Share Directory: NONE"
 	echo "Backup Job: NONE"
@@ -218,6 +227,7 @@ else
 	echo "Backup Share Directory: $IHDD2/shares"
 	echo "Backup Job: /etc/cron.daily/${HOST,,}"
 fi
+
 for i in "${!SHARES[@]}"
 do
 	echo "$IHDD1/shares/$i"
