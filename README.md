@@ -34,7 +34,7 @@ Edit the script to change our configuration
 vim deploy-docker-nas.sh
 ```
 
-Execute the script with superuser privileges to provision the NAS.  Clip the output for your records.  This script can be re-ran since it'll break down the existing containers first.  If your paths change, re-running the script will leave the residual files as they exist.
+Execute the script with superuser privileges to provision the NAS.  Clip the output for your records.  This script can be re-ran since it'll break down the existing containers first.  If your paths change, re-running the script will leave the residual files as they exist.  This script can also be re-ran as is to upgrade the base docker images.
 ```shell
 sudo ./deploy-docker-nas.sh
 ```
@@ -124,6 +124,11 @@ declare -A SHARES=(
 ```
 
 
+## Upgrading
+
+When new versions of the packaged Dockerhub images are released, simply re-run this script to upgrade.  The new image will be downloaded and utilized during re-build.
+
+
 ## Tested Versions
 
 My test environment is as follows.  If you have tested in another environment/version set, please add to this list.
@@ -139,6 +144,7 @@ My test environment is as follows.  If you have tested in another environment/ve
 ## ToDo
 
 * Configuration Validation
+* Create a basic Samba management webapp, since this will complete the technical definition of a NAS
 
 
 ## Feedback
