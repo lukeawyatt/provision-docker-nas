@@ -1,13 +1,13 @@
 #!/bin/bash
-###########################################
-## UBUNTU-NAS-DOCKER PROVISIONING SCRIPT ##
-## ******** RUN AS A SUPERUSER ********* ##
-##                                       ##
-## Author:                   Luke Wyatt  ##
-## Contact:            <luke@meat.space> ##
-## Create Date:               2017.10.02 ##
-## Last Modified Date:        2017.10.04 ##
-###########################################
+###############################################################
+##           UBUNTU-NAS-DOCKER PROVISIONING SCRIPT           ##
+##           ******** RUN AS A SUPERUSER *********           ##
+##                                                           ##
+## Author:                                       Luke Wyatt  ##
+## Contact:                                <luke@meat.space> ##
+## Create Date:                                   2017.10.02 ##
+## Repository:    github.com/lukeawyatt/provision-docker-nas ##
+###############################################################
 
 # REQUIREMENTS:
 # ****************
@@ -79,6 +79,7 @@ declare -A SHARES=(
 echo "1) SYSTEM SETUP"
 systemctl enable docker
 echo;echo;
+
 
 
 # PULL NAS DOCKER IMAGES
