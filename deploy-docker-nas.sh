@@ -140,8 +140,8 @@ echo "4.A) LAUNCH PORTAINER CONTAINER"
 docker run \
 	--volume /var/run/docker.sock:/var/run/docker.sock \
 	--volume "/$HOST/volumes/portainer:/data" \
-	--restart=unless-stopped \
 	--publish=80:9000 \
+	--restart=unless-stopped \
 	--detach=true \
 	--name=Portainer \
 	portainer/portainer:latest
@@ -157,6 +157,7 @@ docker run \
 	--publish=138:138/udp \
 	--publish=139:139 \
 	--publish=445:445 \
+	--restart=unless-stopped \
 	--detach=true \
 	--name=Samba \
 	dperson/samba:latest \
