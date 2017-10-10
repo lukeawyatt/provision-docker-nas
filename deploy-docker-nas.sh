@@ -186,7 +186,7 @@ echo;echo;
 # CLEANUP
 echo "5) DOCKER CLEANUP TIME"
 echo "Removing empty containers..."
-docker system prune -a -f
+docker system prune -a -f --volumes
 # FOR USE WITH DOCKER ENGINE <= 1.13
 # echo "NOTE THIS WILL ERROR WHEN NOTHING NEEDS TO BE CLEANED UP"
 # docker rm -v $(docker ps -a -q -f status=exited)
