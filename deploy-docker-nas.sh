@@ -201,6 +201,7 @@ echo;echo;
 if [ -z ${IHDD2+x} ]; then 
 	echo "6) NO BACKUP PATH SPECIFIED, REMOVING SYNC AGENT JOB IF FOUND"
 	rm -f "/etc/cron.daily/${HOST,,}"
+	echo;echo;
 else 
 	echo "6) CREATING/UPDATING SYNC JOB"
 	echo "File list will output below"
