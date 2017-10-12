@@ -144,7 +144,11 @@ My test environment is as follows.  If you have tested in another environment/ve
 ## ToDo
 
 * Configuration Validation
+* Create and attach volumes separately to prevent strays at re-provision
+* Add a Docker health check
 * Create a basic Samba management webapp, since this will complete the technical definition of a NAS
+* Optional recycle bin
+* Optional docker cleanup process
 
 
 ## Feedback
