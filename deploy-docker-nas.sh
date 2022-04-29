@@ -72,14 +72,12 @@ declare -A SHARES=(
 )
 
 
-
 # LEAVE EVERYTHING ALONE BELOW THIS LINE
 # **************************************
 # SYSTEM SETUP
 echo "1) SYSTEM SETUP"
 systemctl enable docker
 echo;echo;
-
 
 
 # PULL NAS DOCKER IMAGES
@@ -90,7 +88,6 @@ echo;
 echo "2.B) PULLING SAMBA IMAGES"
 docker pull dperson/samba:latest
 echo;echo;
-
 
 
 # STAGE ENVIRONMENT
@@ -135,7 +132,6 @@ chown $USR:$USR "$IHDD2/shares" -R
 echo;echo;
 
 
-
 # RUN NAS CONTAINERS
 echo "4.A) LAUNCH PORTAINER CONTAINER"
 docker run \
@@ -162,7 +158,7 @@ docker run \
 	--detach=true \
 	--name=Samba \
 	dperson/samba:latest \
-	-n -p -S -w "$HOST.local"
+	-n -p -r -S -w "$HOST.local" -g "hide dot files = no"
 
 echo "Creating users..."
 for i in "${!USERS[@]}"
@@ -182,7 +178,6 @@ docker restart Samba
 echo;echo;
 
 
-
 # CLEANUP
 echo "5) DOCKER CLEANUP TIME"
 echo "Removing empty containers..."
@@ -194,7 +189,6 @@ docker system prune -a -f --volumes
 # echo "NOTE THIS WILL ERROR WHEN NOTHING NEEDS TO BE CLEANED UP"
 # docker rmi $(docker images -f "dangling=true" -q)
 echo;echo;
-
 
 
 # SETUP SYNC JOB
@@ -212,7 +206,6 @@ else
 	ls "/etc/cron.daily/${HOST,,}"
 	echo;echo;
 fi
-
 
 
 # PROVISIONED OUTPUT
