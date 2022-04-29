@@ -133,8 +133,8 @@ When new versions of the packaged Dockerhub images are released, simply re-run t
 
 My test environment is as follows.  If you have tested in another environment/version set, please add to this list.
 
-* Ubuntu 16.04.3 LTS
-* GNU Bash 4.3.48
+* Ubuntu 20.04 LTS
+* GNU Bash
 * Docker CE 17.09.0
 * Samba 4.5.8 (Docker)
 * Portainer 1.14.3
