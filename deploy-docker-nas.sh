@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ###############################################################
 ##           UBUNTU-NAS-DOCKER PROVISIONING SCRIPT           ##
 ##           ******** RUN AS A SUPERUSER *********           ##
